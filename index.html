@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Fried Chicken KW</title>
+</head>
+<body>
+    <header>
+        <h1 align="center">FRIED CHICKEN KW</h1>
+    </header>
+
+    <section id="order-section">
+        <h3>Pesan</h3>
+        <form id="order-form">
+            <div id="order-list">
+                <label>Pilih Pesanan:</label>
+                <select class="order-item">
+                    <option value="dada">Dada - Rp.13,000</option>
+                    <option value="pahaAtas">Paha Atas - Rp.13,000</option>
+                    <option value="pahaBawah">Paha Bawah - Rp.11,000</option>
+                    <option value="sayap">Sayap - Rp.11,000</option>
+                </select>
+                <input type="number" class="order-quantity" placeholder="Jumlah" min="1">
+            </div>
+            <button type="button" id="add-order">Tambah Pesanan</button>
+            <h3>Jumlah: <span id="total-price">Rp.0</span></h3>
+            <button type="button" id="place-order">Pesan</button>
+        </form>
+    </section>
+
+    <section id="stock-section">
+        <h3>Input Barang</h3>
+        <form id="stock-form">
+            <label>Nama Barang:</label>
+            <select id="stock-item">
+                <option value="dada">Dada</option>
+                <option value="pahaAtas">Paha Atas</option>
+                <option value="pahaBawah">Paha Bawah</option>
+                <option value="sayap">Sayap</option>
+            </select>
+            <label>Tanggal:</label>
+            <input type="date" id="stock-date">
+            <label>Jumlah Barang:</label>
+            <input type="number" id="stock-quantity" min="1">
+            <button type="button" id="save-stock">Simpan</button>
+        </form>
+    </section>
+
+    <section id="stock-overview">
+        <h3>Stock Barang</h3>
+        <table id="stock-table">
+            <thead>
+                <tr>
+                    <th>Nama Barang</th>
+                    <th>Jumlah</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dada</td>
+                    <td id="stock-dada">0</td>
+                </tr>
+                <tr>
+                    <td>Paha Atas</td>
+                    <td id="stock-pahaAtas">0</td>
+                </tr>
+                <tr>
+                    <td>Paha Bawah</td>
+                    <td id="stock-pahaBawah">0</td>
+                </tr>
+                <tr>
+                    <td>Sayap</td>
+                    <td id="stock-sayap">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="history-section">
+        <h3>Histori Barang Masuk</h3>
+        <table id="history-table">
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Nama Barang</th>
+                    <th>Jumlah Barang</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- History entries will be added here -->
+            </tbody>
+        </table>
+    </section>
+
+    <section id="sales-section">
+        <h3>Hasil Penjualan</h3>
+        <table id="sales-table">
+            <thead>
+                <tr>
+                    <th>Nama Barang</th>
+                    <th>Jumlah</th>
+                    <th>Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dada</td>
+                    <td id="sales-dada">0</td>
+                    <td id="sales-dada-price">Rp.0</td>
+                </tr>
+                <tr>
+                    <td>Paha Atas</td>
+                    <td id="sales-pahaAtas">0</td>
+                    <td id="sales-pahaAtas-price">Rp.0</td>
+                </tr>
+                <tr>
+                    <td>Paha Bawah</td>
+                    <td id="sales-pahaBawah">0</td>
+                    <td id="sales-pahaBawah-price">Rp.0</td>
+                </tr>
+                <tr>
+                    <td>Sayap</td>
+                    <td id="sales-sayap">0</td>
+                    <td id="sales-sayap-price">Rp.0</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td id="total-sales">0</td>
+                    <td id="total-sales-price">Rp.0</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer></footer>
+    <script src="script.js"></script>
+</body>
+</html>
