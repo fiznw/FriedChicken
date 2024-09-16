@@ -21,7 +21,7 @@ let sales = {
 
 let totalSalesPrice = 0;
 
-// Add order functionality
+// Add order 
 document.getElementById('add-order').addEventListener('click', () => {
     let newOrder = document.createElement('div');
     newOrder.innerHTML = `
@@ -41,48 +41,59 @@ document.getElementById('place-order').addEventListener('click', () => {
     let orderItems = document.querySelectorAll('.order-item');
     let orderQuantities = document.querySelectorAll('.order-quantity');
     let totalPrice = 0;
+    let errorMessage = '';
 
     orderItems.forEach((item, index) => {
         let quantity = parseInt(orderQuantities[index].value);
         if (!isNaN(quantity) && quantity > 0) {
-            let price = prices[item.value] * quantity;
-            totalPrice += price;
-            // Update sales
-            sales[item.value] += quantity;
-            // Update stock
-            stock[item.value] -= quantity;
+            // Check stock
+            if (stock[item.value] < quantity) {
+                errorMessage += `Stok ${item.value} habis atau tidak mencukupi. Stok tersedia: ${stock[item.value]}.\n`;
+            } else {
+                let price = prices[item.value] * quantity;
+                totalPrice += price;
+                // Update sales
+                sales[item.value] += quantity;
+                // Update stock
+                stock[item.value] -= quantity;
+            }
         }
     });
 
-    document.getElementById('total-price').textContent = 'Rp.' + totalPrice;
+    // Display error message if any
+    if (errorMessage) {
+        alert(errorMessage);
+    } else {
+        document.getElementById('total-price').textContent = 'Rp.' + totalPrice;
 
-    // Update sales table
-    for (let item in sales) {
-        document.getElementById(`sales-${item}`).textContent = sales[item];
-        document.getElementById(`sales-${item}-price`).textContent = 'Rp.' + (sales[item] * prices[item]);
+        // Update sales table
+        for (let item in sales) {
+            document.getElementById(`sales-${item}`).textContent = sales[item];
+            document.getElementById(`sales-${item}-price`).textContent = 'Rp.' + (sales[item] * prices[item]);
+        }
+
+        // Update total sales
+        totalSalesPrice += totalPrice;
+        document.getElementById('total-sales').textContent = totalSalesPrice;
+        document.getElementById('total-sales-price').textContent = 'Rp.' + totalSalesPrice;
+
+        // Update stock table
+        for (let item in stock) {
+            document.getElementById(`stock-${item}`).textContent = stock[item];
+        }
+
+        // Clear form
+        document.getElementById('order-list').innerHTML = `
+            <label>Pilih Pesanan:</label>
+            <select class="order-item">
+                <option value="dada">Dada - Rp.13,000</option>
+                <option value="pahaAtas">Paha Atas - Rp.13,000</option>
+                <option value="pahaBawah">Paha Bawah - Rp.11,000</option>
+                <option value="sayap">Sayap - Rp.11,000</option>
+            </select>
+            <input type="number" class="order-quantity" placeholder="Jumlah" min="1">
+        `;
     }
-
-    // Update total sales
-    totalSalesPrice += totalPrice;
-    document.getElementById('total-sales').textContent = totalSalesPrice;
-    document.getElementById('total-sales-price').textContent = 'Rp.' + totalSalesPrice;
-
-    // Update stock table
-    for (let item in stock) {
-        document.getElementById(`stock-${item}`).textContent = stock[item];
-    }
-
-    // Clear form
-    document.getElementById('order-list').innerHTML = `
-        <label>Pilih Pesanan:</label>
-        <select class="order-item">
-            <option value="dada">Dada - Rp.13,000</option>
-            <option value="pahaAtas">Paha Atas - Rp.13,000</option>
-            <option value="pahaBawah">Paha Bawah - Rp.11,000</option>
-            <option value="sayap">Sayap - Rp.11,000</option>
-        </select>
-        <input type="number" class="order-quantity" placeholder="Jumlah" min="1">
-    `;
 });
 
 // Stock input functionality
